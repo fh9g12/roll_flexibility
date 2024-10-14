@@ -1,0 +1,10 @@
+.venv/*
+*.mat
+*.fig
+*.asv
+*.f04
+*.f06
+*.log
+*.xdb
+*.bdf
+*/ex_*/**
