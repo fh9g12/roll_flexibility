@@ -47,8 +47,20 @@ fwt_TE(2,1) = fwt_TE(2,1) + obj.gap/2;
 
 wings{2} = laca.model.Wing.From_LE_TE(fwt_LE,fwt_TE,{});
 wings{2}.R = fwt_origin;
+
+
+inner_LE(2,:) = -inner_LE(2,:);
+inner_TE(2,:) = -inner_TE(2,:);
+wings{3} = laca.model.Wing.From_LE_TE(inner_LE,inner_TE,{});
+
+fwt_LE(2,:) = -fwt_LE(2,:);
+fwt_TE(2,:) = -fwt_TE(2,:);
+wings{4} = laca.model.Wing.From_LE_TE(fwt_LE,fwt_TE,{});
+wings{4}.R = fwt_origin.*[1 -1 1]';
+
+
 model = laca.model.Aircraft(wings);
-obj.vlm = laca.vlm.Model.From_laca_model(model,obj.MinSpan,obj.nChord,true);
+obj.vlm = laca.vlm.Model.From_laca_model(model,[obj.MinSpan,obj.MinSpan],obj.nChord,true);
 
 % sort out d_cl and zero intercept ...
 for i = 1:numel(obj.vlm.Wings)
@@ -72,6 +84,13 @@ obj.vlm.Wings{1}.Sections{1}.U = zeros(obj.DoFs*2,1);
 obj.vlm.Wings{2}.Sections{1}.Vbody_func = @(U,x)obj.get_fwt_V_global(U,x); 
 obj.vlm.Wings{2}.Sections{1}.updateNormal = false;
 obj.vlm.Wings{2}.Sections{1}.U = zeros(obj.DoFs*2,1);
+
+
+obj.vlm.Wings{3}.Sections{1}.U = zeros(obj.DoFs*2,1);
+obj.vlm.Wings{3}.Sections{1}.Vbody_func = @(U,x)[zeros(1,size(x,2));U(obj.DoFs+1).*x(2,:);zeros(1,size(x,2))]; 
+
+obj.vlm.Wings{4}.Sections{1}.U = zeros(obj.DoFs*2,1);
+obj.vlm.Wings{4}.Sections{1}.Vbody_func = @(U,x)[zeros(1,size(x,2));U(obj.DoFs+1).*x(2,:)+fwt_origin(2);zeros(1,size(x,2))]; 
 
 % wing stitch
 stitch_idx = 1;
@@ -109,7 +128,7 @@ if obj.NoTorque
 end
 
 % set AIC
-obj.vlm.XZ_sym = true;
+obj.vlm.XZ_sym = false;
 if opts.SetAIC
     obj.vlm.generate_te_horseshoe(dcrg.rotzd(obj.Sweep)*opts.VDir*20);
     obj.vlm.generate_AIC3D();

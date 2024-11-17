@@ -6,6 +6,10 @@ p.vlm.Wings{2}.Sections{1}.U = U;
 p.vlm.Wings{2}.Sections{1}.Rot = p.get_fwt_A(U);
 p.vlm.Wings{2}.Sections{1}.R = p.get_pos_fwt2global(U,[0,0,0]') + [0 p.root_y 0]';
 
+
+p.vlm.Wings{3}.Sections{1}.Rot = p.get_inner_A(U);
+% p.vlm.Wings{4}.Sections{1}.R = p.get_inner_A(U)*[0;-p.innerSpan/2;0];
+
 v_dir = -p.get_air_velocity(t);
 if p.updateAIC
     p.vlm.generate_te_horseshoe((v_dir./norm(v_dir))*10);

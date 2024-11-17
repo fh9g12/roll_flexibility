@@ -13,9 +13,9 @@
 
 %% Span Variations
 % names = ["B3T2_FWT_RC","B3T2_FWT_Locked_RC"];
-names = ["B3T2_FWT_RC"];
-Spans = [1,1.2];
-Chords = [0.07,0.11,0.15];
+names = ["Roll_B3T2_FWT_RC"];
+Spans = [1];
+Chords = [0.11];
 for i = 1:length(names)
     for si = 1:length(Spans)
         for ci = 1:length(Chords)
@@ -34,7 +34,7 @@ function get_data(Span,Chord)
     model.MinSpan = [0.35/20,0.15/10];
     model.nChord = 4;
     Mat = baff.Material.Aluminium;
-    model = set_roll_model_params(model,10,g=0,h_b=5*1e-3,c_b=19e-3,sigma=0,rho=Mat.rho*4.8e-3,Span=Span,chord=Chord);
+    model = set_roll_model_params(model,10,g=0,h_b=5*1e-3,c_b=19e-3,sigma=0,Mat=Mat,Span=Span,chord=Chord);
     model.updateAIC = true;
     model.generate_vlm_model();
     % calc AIC in linear postion
@@ -64,7 +64,7 @@ function get_data(Span,Chord)
     ail = -5;
     ails = linspace(0,ail,21);
     model = set_roll_model_params(model,10,g=0,h_b=hs(1)*1e-3,c_b=19e-3,...
-            sigma=0,rho=Mat.rho*4.8e-3);
+            sigma=0,Mat=Mat);
     fh.printing.title(sprintf('Increase torque'))
     X0 = zeros(model.DoFs*2,1);
     for i=1:length(ails)
@@ -80,7 +80,7 @@ function get_data(Span,Chord)
     fh.printing.title(sprintf('Change thickness'))
     for i = 1:length(hs)
         model = set_roll_model_params(model,10,g=0,h_b=hs(i)*1e-3,c_b=19e-3,...
-            sigma=0,rho=Mat.rho*4.8e-3);
+            sigma=0,Mat=Mat);
         if i>2
             X0 = res(idx-1).Xs+(res(idx-1).Xs-res(idx-2).Xs);
         end
@@ -101,7 +101,7 @@ function get_data(Span,Chord)
         X0 = res(hi).Xs;
         for i = 1:length(s_up)
             model = set_roll_model_params(model,10,g=0,h_b=hs(hi)*1e-3,c_b=19e-3,...
-                sigma=s_up(i),rho=Mat.rho*4.8e-3);
+                sigma=s_up(i),Mat=Mat);
             if i>2
                 X0 = res(idx-1).Xs+(res(idx-1).Xs-res(idx-2).Xs);
             end
@@ -114,7 +114,7 @@ function get_data(Span,Chord)
         X0 = res(hi).Xs;
         for i = 1:length(s_down)
             model = set_roll_model_params(model,10,g=0,h_b=hs(hi)*1e-3,c_b=19e-3,...
-                sigma=s_down(i),rho=Mat.rho*4.8e-3);
+                sigma=s_down(i),Mat=Mat);
             if i>2
                 X0 = res(idx-1).Xs+(res(idx-1).Xs-res(idx-2).Xs);
             end

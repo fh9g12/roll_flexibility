@@ -1,0 +1,159 @@
+function out = get_fwt_Q_LHS(p,U,W,Xi)
+	%GET_FWT_Q_LHS Auto-generated function from moyra
+	%
+	%	Created at : Sun Nov 17 16:26:59 2024 
+	%	Created with : moyra https://pypi.org/project/moyra/
+	%
+	%% extract required parameters from structure
+	Lambda = p.Lambda;
+	b_i = p.b_i;
+	y_h = p.y_h;
+	%% create common groups
+	rep_1 = b_i.^(-2);
+	rep_2 = y_h.*rep_1;
+	rep_3 = rep_2.*U(6);
+	rep_4 = sin(rep_3);
+	rep_5 = cos(U(7));
+	rep_6 = 2*rep_2;
+	rep_7 = rep_6.*U(5);
+	rep_8 = cos(rep_7);
+	rep_9 = rep_5.*rep_8;
+	rep_10 = rep_4.*rep_9;
+	rep_11 = sin(U(7));
+	rep_12 = sin(Lambda);
+	rep_13 = cos(rep_3);
+	rep_14 = rep_12.*rep_13;
+	rep_15 = sin(rep_7);
+	rep_16 = cos(Lambda);
+	rep_17 = rep_16.*rep_4;
+	rep_18 = rep_15.*rep_17;
+	rep_19 = rep_14 - rep_18;
+	rep_20 = rep_11.*rep_19;
+	rep_21 = rep_10 + rep_20;
+	rep_22 = rep_15.*rep_5;
+	rep_23 = rep_16.*rep_8;
+	rep_24 = rep_11.*rep_23;
+	rep_25 = rep_22 + rep_24;
+	rep_26 = rep_12.^2;
+	rep_27 = rep_26.*rep_8;
+	rep_28 = rep_11.*rep_15;
+	rep_29 = rep_16.*rep_28;
+	rep_30 = rep_16.^2;
+	rep_31 = rep_30.*rep_9;
+	rep_32 = rep_27 - rep_29 + rep_31;
+	rep_33 = -rep_12.*rep_16.*rep_5.*rep_8 + rep_12.*rep_23 + rep_12.*rep_28;
+	rep_34 = -rep_33;
+	rep_35 = rep_25.^2 + rep_32.^2 + rep_34.^2;
+	rep_36 = rep_12.*rep_4;
+	rep_37 = rep_13.*rep_16;
+	rep_38 = rep_15.*rep_37;
+	rep_39 = rep_36 + rep_38;
+	rep_40 = rep_11.*rep_39;
+	rep_41 = -rep_13.*rep_5.*rep_8 + rep_40;
+	rep_42 = -rep_41;
+	rep_43 = rep_11.*rep_8;
+	rep_44 = rep_14.*rep_43;
+	rep_45 = rep_14.*rep_15;
+	rep_46 = rep_16.*rep_4 - rep_45;
+	rep_47 = rep_39.*rep_5;
+	rep_48 = rep_12.*rep_47 + rep_16.*rep_46 + rep_44;
+	rep_49 = rep_15.*rep_36;
+	rep_50 = -rep_37 - rep_49;
+	rep_51 = -rep_12.*rep_19.*rep_5 + rep_16.*rep_50 + rep_36.*rep_43;
+	rep_52 = -rep_51;
+	rep_53 = rep_37.*rep_43;
+	rep_54 = -rep_12.*rep_46 + rep_16.*rep_47 + rep_53;
+	rep_55 = rep_17.*rep_43;
+	rep_56 = rep_19.*rep_5;
+	rep_57 = rep_12.*rep_50 + rep_16.*rep_56 - rep_55;
+	rep_58 = rep_21.*rep_41 + rep_48.*rep_52 + rep_54.*rep_57;
+	rep_59 = -rep_54;
+	rep_60 = -rep_48;
+	rep_61 = -y_h + rep_25.*Xi(3,:) + rep_32.*Xi(2,:) + rep_34.*Xi(1,:);
+	rep_62 = -rep_61;
+	rep_63 = -rep_25;
+	rep_64 = y_h.^2.*rep_1;
+	rep_65 = rep_64.*U(5);
+	rep_66 = rep_42.*Xi(3,:) + rep_59.*Xi(2,:) + rep_60.*Xi(1,:) + rep_65;
+	rep_67 = rep_41.*rep_62 + rep_63.*rep_66;
+	rep_68 = -rep_21;
+	rep_69 = rep_21.*Xi(3,:) + rep_52.*Xi(1,:) + rep_57.*Xi(2,:);
+	rep_70 = -rep_69;
+	rep_71 = rep_61.*rep_68 + rep_63.*rep_70;
+	rep_72 = rep_41.*rep_66 + rep_61.*rep_63 + rep_68.*rep_69;
+	rep_73 = -rep_32;
+	rep_74 = -rep_57;
+	rep_75 = rep_54.*rep_66 + rep_61.*rep_73 + rep_69.*rep_74;
+	rep_76 = rep_33.*rep_61 + rep_48.*rep_66 + rep_51.*rep_69;
+	rep_77 = rep_25.*rep_72 + rep_32.*rep_75 + rep_34.*rep_76 + rep_61;
+	rep_78 = rep_41.*rep_72 + rep_41.*Xi(3,:) + rep_48.*rep_76 + rep_48.*Xi(1,:) + rep_54.*rep_75 + rep_54.*Xi(2,:) - rep_65;
+	rep_79 = rep_33.*rep_66 + rep_48.*rep_62;
+	rep_80 = rep_33.*rep_70 + rep_51.*rep_61;
+	rep_81 = rep_54.*rep_62 + rep_66.*rep_73;
+	rep_82 = rep_61.*rep_74 + rep_70.*rep_73;
+	rep_83 = rep_13.*rep_6;
+	rep_84 = -rep_22.*rep_83 - rep_53.*rep_6;
+	rep_85 = 2*y_h.*rep_1.*rep_11.*rep_13.*rep_15.*rep_16 - rep_27.*rep_83 - rep_31.*rep_83;
+	rep_86 = rep_28.*rep_6;
+	rep_87 = rep_23.*rep_6;
+	rep_88 = rep_16.*rep_6.*rep_9;
+	rep_89 = rep_14.*rep_86 + rep_14.*rep_87 - rep_14.*rep_88;
+	rep_90 = rep_25.*rep_84 + rep_32.*rep_85 + rep_34.*rep_89;
+	rep_91 = 2*y_h.*rep_1.*rep_5.*rep_8 - rep_29.*rep_6;
+	rep_92 = rep_30.*rep_6;
+	rep_93 = -rep_15.*rep_26.*rep_6 - rep_22.*rep_92 - rep_24.*rep_6;
+	rep_94 = rep_12.*rep_6;
+	rep_95 = rep_16.*rep_22;
+	rep_96 = 2*y_h.*rep_1.*rep_12.*rep_15.*rep_16 - rep_43.*rep_94 - rep_94.*rep_95;
+	rep_97 = rep_21.*rep_91 + rep_52.*rep_96 + rep_57.*rep_93;
+	rep_98 = rep_4.*rep_6;
+	rep_99 = -rep_22.*rep_98 - rep_55.*rep_6;
+	rep_100 = 2*y_h.*rep_1.*rep_11.*rep_15.*rep_16.*rep_4 - rep_10.*rep_92 - rep_27.*rep_98;
+	rep_101 = rep_36.*rep_86 + rep_36.*rep_87 - rep_36.*rep_88;
+	rep_102 = rep_100.*rep_59 + rep_101.*rep_60 + rep_42.*rep_99;
+	rep_103 = -rep_66;
+	rep_104 = rep_103.*rep_68 + rep_41.*rep_69;
+	rep_105 = rep_72.*rep_91 + rep_75.*rep_93 + rep_76.*rep_96 + rep_91.*Xi(3,:) + rep_93.*Xi(2,:) + rep_96.*Xi(1,:);
+	rep_106 = rep_100.*rep_75 + rep_100.*Xi(2,:) + rep_101.*rep_76 + rep_101.*Xi(1,:) + rep_72.*rep_99 + rep_99.*Xi(3,:);
+	rep_107 = rep_64 + rep_72.*rep_84 + rep_75.*rep_85 + rep_76.*rep_89 + rep_84.*Xi(3,:) + rep_85.*Xi(2,:) + rep_89.*Xi(1,:);
+	rep_108 = rep_103.*rep_51 + rep_48.*rep_69;
+	rep_109 = rep_103.*rep_74 + rep_54.*rep_69;
+	rep_110 = rep_14.*rep_2 - rep_18.*rep_2;
+	rep_111 = -rep_10.*rep_2 - rep_11.*rep_110;
+	rep_112 = rep_2.*rep_37 + rep_2.*rep_49;
+	rep_113 = rep_110.*rep_5;
+	rep_114 = rep_112.*rep_12 - rep_113.*rep_16 + rep_2.*rep_55;
+	rep_115 = y_h.*rep_1.*rep_11.*rep_12.*rep_4.*rep_8 - rep_112.*rep_16 - rep_113.*rep_12;
+	rep_116 = rep_111.*rep_25 + rep_114.*rep_32 + rep_115.*rep_34;
+	rep_117 = -rep_2.*rep_36 - rep_2.*rep_38;
+	rep_118 = rep_11.*rep_117 + rep_13.*rep_2.*rep_9;
+	rep_119 = y_h.*rep_1.*rep_16.*rep_4 - rep_2.*rep_45;
+	rep_120 = rep_117.*rep_16.*rep_5 + rep_119.*rep_12 - rep_2.*rep_53;
+	rep_121 = rep_117.*rep_12.*rep_5 - rep_119.*rep_16 - rep_2.*rep_44;
+	rep_122 = rep_118.*rep_42 + rep_120.*rep_59 + rep_121.*rep_60;
+	rep_123 = rep_111.*rep_72 + rep_111.*Xi(3,:) + rep_114.*rep_75 + rep_114.*Xi(2,:) + rep_115.*rep_76 + rep_115.*Xi(1,:);
+	rep_124 = rep_118.*rep_72 + rep_118.*Xi(3,:) + rep_120.*rep_75 + rep_120.*Xi(2,:) + rep_121.*rep_76 + rep_121.*Xi(1,:);
+	rep_125 = -rep_13.*rep_43 - rep_47;
+	rep_126 = rep_16.*rep_40 - rep_37.*rep_9;
+	rep_127 = rep_12.*rep_40 - rep_14.*rep_9;
+	rep_128 = rep_125.*rep_25 + rep_126.*rep_32 + rep_127.*rep_34;
+	rep_129 = rep_16.*rep_5.*rep_8 - rep_28;
+	rep_130 = -rep_30.*rep_43 - rep_95;
+	rep_131 = -rep_12.*rep_22 - rep_12.*rep_24;
+	rep_132 = rep_129.*rep_21 + rep_130.*rep_57 + rep_131.*rep_52;
+	rep_133 = -rep_4.*rep_43 + rep_56;
+	rep_134 = -rep_16.*rep_20 - rep_17.*rep_9;
+	rep_135 = -rep_12.*rep_20 - rep_36.*rep_9;
+	rep_136 = rep_133.*rep_42 + rep_134.*rep_59 + rep_135.*rep_60;
+	rep_137 = rep_129.*rep_72 + rep_129.*Xi(3,:) + rep_130.*rep_75 + rep_130.*Xi(2,:) + rep_131.*rep_76 + rep_131.*Xi(1,:);
+	rep_138 = rep_125.*rep_72 + rep_125.*Xi(3,:) + rep_126.*rep_75 + rep_126.*Xi(2,:) + rep_127.*rep_76 + rep_127.*Xi(1,:);
+	rep_139 = rep_133.*rep_72 + rep_133.*Xi(3,:) + rep_134.*rep_75 + rep_134.*Xi(2,:) + rep_135.*rep_76 + rep_135.*Xi(1,:);
+	%% create output vector
+	out = [(rep_21.*rep_35 + rep_42.*rep_58).*W(6,:) + (rep_35.*rep_52 + rep_58.*rep_60).*W(4,:) + (rep_35.*rep_57 + rep_58.*rep_59).*W(5,:) + (rep_25.*rep_78 + rep_35.*rep_67 + rep_42.*rep_77 + rep_58.*rep_71).*W(3,:) + (rep_32.*rep_78 + rep_35.*rep_81 + rep_58.*rep_82 + rep_59.*rep_77).*W(2,:) + (rep_34.*rep_78 + rep_35.*rep_79 + rep_58.*rep_80 + rep_60.*rep_77).*W(1,:);...
+		 0.*W(1,:);...
+		 0.*W(1,:);...
+		 0.*W(1,:);...
+		 (rep_102.*rep_25 + rep_21.*rep_90 + rep_42.*rep_97).*W(6,:) + (rep_102.*rep_32 + rep_57.*rep_90 + rep_59.*rep_97).*W(5,:) + (rep_102.*rep_34 + rep_52.*rep_90 + rep_60.*rep_97).*W(4,:) + (rep_102.*rep_104 + rep_105.*rep_25 + rep_106.*rep_21 + rep_107.*rep_42 + rep_67.*rep_90 + rep_71.*rep_97).*W(3,:) + (rep_102.*rep_108 + rep_105.*rep_34 + rep_106.*rep_52 + rep_107.*rep_60 + rep_79.*rep_90 + rep_80.*rep_97).*W(1,:) + (rep_102.*rep_109 + rep_105.*rep_32 + rep_106.*rep_57 + rep_107.*rep_59 + rep_81.*rep_90 + rep_82.*rep_97).*W(2,:);...
+		 (rep_116.*rep_21 + rep_122.*rep_25).*W(6,:) + (rep_116.*rep_52 + rep_122.*rep_34).*W(4,:) + (rep_116.*rep_57 + rep_122.*rep_32).*W(5,:) + (rep_104.*rep_122 + rep_116.*rep_67 + rep_123.*rep_42 + rep_124.*rep_21).*W(3,:) + (rep_108.*rep_122 + rep_116.*rep_79 + rep_123.*rep_60 + rep_124.*rep_52).*W(1,:) + (rep_109.*rep_122 + rep_116.*rep_81 + rep_123.*rep_59 + rep_124.*rep_57).*W(2,:);...
+		 (rep_128.*rep_21 + rep_132.*rep_42 + rep_136.*rep_25).*W(6,:) + (rep_128.*rep_52 + rep_132.*rep_60 + rep_136.*rep_34).*W(4,:) + (rep_128.*rep_57 + rep_132.*rep_59 + rep_136.*rep_32).*W(5,:) + (rep_104.*rep_136 + rep_128.*rep_67 + rep_132.*rep_71 + rep_137.*rep_25 + rep_138.*rep_42 + rep_139.*rep_21).*W(3,:) + (rep_108.*rep_136 + rep_128.*rep_79 + rep_132.*rep_80 + rep_137.*rep_34 + rep_138.*rep_60 + rep_139.*rep_52).*W(1,:) + (rep_109.*rep_136 + rep_128.*rep_81 + rep_132.*rep_82 + rep_137.*rep_32 + rep_138.*rep_59 + rep_139.*rep_57).*W(2,:)];
+end
